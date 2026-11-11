@@ -635,12 +635,12 @@ function init(){
  var canvas=document.getElementById('stage'),renderer;
  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});}catch(e){fail();return;}
  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
- renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+ renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.NoToneMapping;
  var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(35,1,1,5000);camera.position.set(0,0,1250);
 
  /* studio environment for reflections */
  var ec=document.createElement('canvas');ec.width=1024;ec.height=512;var g=ec.getContext('2d');
- var bg=g.createLinearGradient(0,0,0,512);bg.addColorStop(0,'#ffffff');bg.addColorStop(.55,'#d9d6cf');bg.addColorStop(1,'#8d8a84');g.fillStyle=bg;g.fillRect(0,0,1024,512);
+ var bg=g.createLinearGradient(0,0,0,512);bg.addColorStop(0,'#bdbab3');bg.addColorStop(.55,'#55524d');bg.addColorStop(1,'#1e1d1b');g.fillStyle=bg;g.fillRect(0,0,1024,512);
  function blob(x,y,r,c){var rg=g.createRadialGradient(x,y,0,x,y,r);rg.addColorStop(0,c);rg.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=rg;g.fillRect(0,0,1024,512);}
  blob(220,150,170,'rgba(255,240,210,1)');blob(760,120,140,'rgba(255,220,160,.9)');blob(520,60,90,'rgba(255,255,255,.95)');blob(900,330,200,'rgba(255,236,190,.6)');blob(120,360,160,'rgba(255,200,120,.35)');
  var et=new THREE.CanvasTexture(ec);et.mapping=THREE.EquirectangularReflectionMapping;et.encoding=THREE.sRGBEncoding;
@@ -650,8 +650,8 @@ function init(){
  function toShapes(list){return list.map(function(s){var sh=new THREE.Shape();s.o.forEach(function(p,i){var x=p[0]-W/2,y=H/2-p[1];if(i)sh.lineTo(x,y);else sh.moveTo(x,y);});
   s.h.forEach(function(hh){var path=new THREE.Path();hh.forEach(function(p,i){var x=p[0]-W/2,y=H/2-p[1];if(i)path.lineTo(x,y);else path.moveTo(x,y);});sh.holes.push(path);});return sh;});}
  var ex={depth:26,bevelEnabled:true,bevelThickness:5,bevelSize:2.6,bevelSegments:4,curveSegments:4};
- var green=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0x0B6B3A).convertSRGBToLinear(),metalness:.15,roughness:.32,clearcoat:.7,clearcoatRoughness:.15,envMapIntensity:.7,transparent:true,opacity:0});
- var gold=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0xF2BE1A).convertSRGBToLinear(),metalness:.8,roughness:.26,clearcoat:.5,envMapIntensity:2.2,emissive:new THREE.Color(0x4a3300).convertSRGBToLinear(),emissiveIntensity:.6,transparent:true,opacity:0});
+ var green=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0x0B6B3A).convertSRGBToLinear(),metalness:.1,roughness:.38,clearcoat:.6,clearcoatRoughness:.2,envMapIntensity:.45,transparent:true,opacity:0});
+ var gold=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0xF2BE1A).convertSRGBToLinear(),metalness:.75,roughness:.3,clearcoat:.4,envMapIntensity:1.1,emissive:new THREE.Color(0x5a3c00).convertSRGBToLinear(),emissiveIntensity:.5,transparent:true,opacity:0});
  var gGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.g),ex),yGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.y),Object.assign({},ex,{depth:34})),tGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.t),Object.assign({},ex,{depth:22}));
  [gGeo,yGeo,tGeo].forEach(function(geo){geo.translate(0,0,-13);});
  var emblem=new THREE.Group(),word=new THREE.Group(),logo=new THREE.Group();
@@ -661,8 +661,8 @@ function init(){
  gm.position.y=-ecy;ym.position.y=-ecy;emblem.add(gm);emblem.add(ym);emblem.position.y=ecy;
  word.add(tm);logo.add(emblem);logo.add(word);scene.add(logo);
  /* lights */
- scene.add(new THREE.AmbientLight(0xffffff,.45));
- var key=new THREE.SpotLight(0xfff1d6,2.2,0,Math.PI/5,.6,1);key.position.set(-500,700,1200);scene.add(key);
+ scene.add(new THREE.AmbientLight(0xffffff,.3));
+ var key=new THREE.SpotLight(0xfff1d6,1.4,0,Math.PI/5,.6,1);key.position.set(-500,700,1200);scene.add(key);
  var rim=new THREE.PointLight(0xFFE2A0,1.1,0);rim.position.set(700,-200,400);scene.add(rim);
  var cool=new THREE.PointLight(0xffffff,.5,0);cool.position.set(-800,-500,300);scene.add(cool);
 
