@@ -702,7 +702,7 @@ function init(){
    if(p>=1){done=true;pts.visible=false;green.transparent=gold.transparent=false;tm.material.transparent=true;}}
   sx2+=(mx-sx2)*.05;sy2+=(my-sy2)*.05;
   /* hero placement → follows the page as a smaller emblem */
-  var hx=narrow?0:330,hy=narrow?190:-10,hs=narrow?.5:1.02;
+  var hx=narrow?0:340,hy=narrow?190:55,hs=narrow?.5:.9;
   var fx=narrow?0:430,fy=narrow?180:0,fs=narrow?.38:.48;
   var q=Math.min(1,sp);var qx=hx+(fx-hx)*q,qy=hy+(fy-hy)*q,qs=hs+(fs-hs)*q;
   logo.position.set(qx,qy,0);logo.scale.setScalar(qs);
