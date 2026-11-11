@@ -635,7 +635,7 @@ function init(){
  var canvas=document.getElementById('stage'),renderer;
  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});}catch(e){fail();return;}
  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
- renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
+ renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
  var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(35,1,1,5000);camera.position.set(0,0,1250);
 
  /* studio environment for reflections */
@@ -650,8 +650,8 @@ function init(){
  function toShapes(list){return list.map(function(s){var sh=new THREE.Shape();s.o.forEach(function(p,i){var x=p[0]-W/2,y=H/2-p[1];if(i)sh.lineTo(x,y);else sh.moveTo(x,y);});
   s.h.forEach(function(hh){var path=new THREE.Path();hh.forEach(function(p,i){var x=p[0]-W/2,y=H/2-p[1];if(i)path.lineTo(x,y);else path.moveTo(x,y);});sh.holes.push(path);});return sh;});}
  var ex={depth:26,bevelEnabled:true,bevelThickness:5,bevelSize:2.6,bevelSegments:4,curveSegments:4};
- var green=new THREE.MeshPhysicalMaterial({color:0x0E6B3A,metalness:.35,roughness:.28,clearcoat:1,clearcoatRoughness:.12,envMapIntensity:1.4,transparent:true,opacity:0});
- var gold=new THREE.MeshPhysicalMaterial({color:0xE8B10F,metalness:1,roughness:.2,clearcoat:.5,envMapIntensity:1.7,transparent:true,opacity:0});
+ var green=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0x0B6B3A).convertSRGBToLinear(),metalness:.15,roughness:.32,clearcoat:.7,clearcoatRoughness:.15,envMapIntensity:.7,transparent:true,opacity:0});
+ var gold=new THREE.MeshPhysicalMaterial({color:new THREE.Color(0xF2BE1A).convertSRGBToLinear(),metalness:.8,roughness:.26,clearcoat:.5,envMapIntensity:2.2,emissive:new THREE.Color(0x4a3300).convertSRGBToLinear(),emissiveIntensity:.6,transparent:true,opacity:0});
  var gGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.g),ex),yGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.y),Object.assign({},ex,{depth:34})),tGeo=new THREE.ExtrudeGeometry(toShapes(LOGO.t),Object.assign({},ex,{depth:22}));
  [gGeo,yGeo,tGeo].forEach(function(geo){geo.translate(0,0,-13);});
  var emblem=new THREE.Group(),word=new THREE.Group(),logo=new THREE.Group();
@@ -661,7 +661,7 @@ function init(){
  gm.position.y=-ecy;ym.position.y=-ecy;emblem.add(gm);emblem.add(ym);emblem.position.y=ecy;
  word.add(tm);logo.add(emblem);logo.add(word);scene.add(logo);
  /* lights */
- scene.add(new THREE.AmbientLight(0xffffff,.25));
+ scene.add(new THREE.AmbientLight(0xffffff,.45));
  var key=new THREE.SpotLight(0xfff1d6,2.2,0,Math.PI/5,.6,1);key.position.set(-500,700,1200);scene.add(key);
  var rim=new THREE.PointLight(0xFF7AC6,1.3,0);rim.position.set(700,-200,400);scene.add(rim);
  var cool=new THREE.PointLight(0x9b6bff,1.1,0);cool.position.set(-800,-500,300);scene.add(cool);
@@ -702,7 +702,7 @@ function init(){
    if(p>=1){done=true;pts.visible=false;green.transparent=gold.transparent=false;tm.material.transparent=true;}}
   sx2+=(mx-sx2)*.05;sy2+=(my-sy2)*.05;
   /* hero placement → follows the page as a smaller emblem */
-  var hx=narrow?0:330,hy=narrow?220:-10,hs=narrow?.62:1.02;
+  var hx=narrow?0:330,hy=narrow?190:-10,hs=narrow?.5:1.02;
   var fx=narrow?0:430,fy=narrow?180:0,fs=narrow?.38:.48;
   var q=Math.min(1,sp);var qx=hx+(fx-hx)*q,qy=hy+(fy-hy)*q,qs=hs+(fs-hs)*q;
   logo.position.set(qx,qy,0);logo.scale.setScalar(qs);
