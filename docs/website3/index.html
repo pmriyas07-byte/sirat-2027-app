@@ -66,14 +66,14 @@ nav.top .in{display:flex;align-items:center;gap:20px;height:78px}
 @media (max-width:900px){.dots{display:none}}
 
 /* hero */
-.hero{min-height:100vh;padding:0;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:radial-gradient(800px 600px at 50% 32%,rgba(227,176,75,.18),transparent 60%),radial-gradient(1200px 800px at 50% 120%,var(--deep),transparent 70%),var(--wine)}
+.hero{min-height:100vh;padding:0;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;background:radial-gradient(800px 600px at 50% 32%,rgba(227,176,75,.18),transparent 60%),radial-gradient(1200px 800px at 50% 120%,var(--deep),transparent 70%),var(--wine)}
 #stage{position:absolute;inset:0;width:100%;height:100%;display:block}
-.halo{position:absolute;left:50%;top:30%;width:min(70vw,620px);height:min(70vw,620px);transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(227,176,75,.25);pointer-events:none}
+.halo{position:absolute;left:50%;top:31%;width:min(70vw,620px);height:min(70vw,620px);transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(227,176,75,.25);pointer-events:none}
 .halo:after{content:"";position:absolute;inset:-36px;border-radius:50%;border:1px dashed rgba(227,176,75,.18);animation:rot 60s linear infinite}
 @keyframes rot{to{transform:rotate(360deg)}}
 .fallback-logo{display:none;position:absolute;left:50%;top:30%;transform:translate(-50%,-50%);width:min(52vw,320px)}
 .no3d .fallback-logo{display:block}
-.hero-c{position:relative;z-index:3;text-align:center;padding:0 24px 56px;display:flex;flex-direction:column;align-items:center;gap:22px}
+.hero-c{position:relative;z-index:3;text-align:center;padding:55vh 24px 64px;display:flex;flex-direction:column;align-items:center;gap:22px}
 .hero h1{font-size:clamp(30px,4.4vw,56px);max-width:900px}
 .hero h1 i{color:var(--gold2)}
 .hero .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,243,228,.82)}
@@ -85,6 +85,7 @@ nav.top .in{display:flex;align-items:center;gap:20px;height:78px}
 .count b{display:block;font-family:"Playfair Display",serif;font-size:26px;font-variant-numeric:tabular-nums;line-height:1.2}
 .count span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,243,228,.6)}
 @media (max-width:600px){.count div{width:64px}.count b{font-size:21px}}
+@media (max-width:760px){.hero-c{padding-top:50vh}.halo{top:26%}.fallback-logo{top:26%}}
 
 /* cream intro */
 .cream{background:var(--cream);color:var(--ink)}
@@ -586,7 +587,7 @@ function init(){
    if(p>=1){done=true;pts.visible=false;green.transparent=gold.transparent=false;tm.material.transparent=true;}}
   sx2+=(mx-sx2)*.05;sy2+=(my-sy2)*.05;
   /* centred on the hero, gently swaying; fades as you scroll */
-  var hs=narrow?.46:.6;logo.position.set(0,narrow?150:118,0);logo.scale.setScalar(hs);
+  var hs=narrow?.5:.54;logo.position.set(0,narrow?165:150,0);logo.scale.setScalar(hs);
   if(done){tm.material.opacity=1;}
   logo.rotation.y=reduce?0:Math.sin(t*.45)*.42+sx2*.5;logo.rotation.x=reduce?0:sy2*.25+Math.sin(t*.3)*.05;
   emblem.rotation.z=reduce?0:t*.1;
