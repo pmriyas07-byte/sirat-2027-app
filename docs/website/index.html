@@ -723,8 +723,8 @@ function initScene(){
  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
  var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.set(0,0,9);
  var root=new THREE.Group();scene.add(root);
- var gold=new THREE.MeshStandardMaterial({color:0xE8B94A,metalness:.85,roughness:.22,emissive:0x2a1a00,emissiveIntensity:.25});
- var teal=new THREE.MeshStandardMaterial({color:0x3DD6C6,metalness:.6,roughness:.3,emissive:0x053a35,emissiveIntensity:.35});
+ var gold=new THREE.MeshStandardMaterial({color:0xF2C75C,metalness:.75,roughness:.2,emissive:0x6b4a08,emissiveIntensity:.45});
+ var teal=new THREE.MeshStandardMaterial({color:0x3DD6C6,metalness:.55,roughness:.28,emissive:0x0a4f48,emissiveIntensity:.4});
  var k1=new THREE.Mesh(new THREE.TorusKnotGeometry(1.55,.17,400,40,2,7),gold);
  var k2=new THREE.Mesh(new THREE.TorusKnotGeometry(1.55,.17,400,40,2,7),teal);k2.rotation.z=Math.PI/7;k2.scale.setScalar(.985);
  var emblem=new THREE.Group();emblem.add(k1);emblem.add(k2);root.add(emblem);
@@ -746,15 +746,15 @@ function initScene(){
  var S=900,sp2=new Float32Array(S*3);for(var k=0;k<S;k++){sp2[k*3]=(Math.random()-.5)*40;sp2[k*3+1]=(Math.random()-.5)*24;sp2[k*3+2]=-Math.random()*20-4;}
  var sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sp2,3));
  scene.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xF6D88C,size:.04,transparent:true,opacity:.5})));
- scene.add(new THREE.AmbientLight(0xffffff,.35));
+ scene.add(new THREE.AmbientLight(0xffffff,.55));
  var l1=new THREE.PointLight(0xF6D88C,2.2,40);l1.position.set(5,4,6);scene.add(l1);
  var l2=new THREE.PointLight(0x3DD6C6,1.8,40);l2.position.set(-6,-3,4);scene.add(l2);
  var dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(0,5,8);scene.add(dl);
  var mx=0,my=0,tx=0,ty=0;
  window.addEventListener('pointermove',function(e){mx=(e.clientX/window.innerWidth-.5);my=(e.clientY/window.innerHeight-.5);},{passive:true});
  function size(){var w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
-  var wide=w>900;root.position.set(wide?2.6:0,wide?0:-.2,0);root.scale.setScalar(wide?1:.82);
-  canvas.style.opacity=wide?1:.45;}
+  var wide=w>900;root.position.set(wide?2.6:1.4,wide?0:-2.2,wide?0:-1.5);root.scale.setScalar(wide?1:.6);
+  canvas.style.opacity=wide?1:.38;}
  window.addEventListener('resize',size);size();
  var visible=true;if('IntersectionObserver' in window){new IntersectionObserver(function(e){visible=e[0].isIntersecting;}).observe(canvas);}
  var clock=new THREE.Clock();
