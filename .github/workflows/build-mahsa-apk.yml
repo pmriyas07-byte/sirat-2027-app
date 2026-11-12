@@ -1,4 +1,4 @@
-name: Build MAHSA Health APK
+name: Build MAHSA Pulse APK
 on:
   push:
     branches: [ main ]
@@ -24,11 +24,11 @@ jobs:
       - name: Build debug APK
         run: gradle assembleDebug --no-daemon
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk ../MAHSA-Health.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk ../MAHSA-Pulse.apk
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: mahsa-build-${{ github.run_number }}
-          name: MAHSA Health App (build ${{ github.run_number }})
-          body: Download MAHSA-Health.apk below and open it on an Android phone or tablet to install. Prototype with sample data.
-          files: MAHSA-Health.apk
+          name: MAHSA Pulse App (build ${{ github.run_number }})
+          body: Download MAHSA-Pulse.apk below and open it on an Android phone or tablet to install. Prototype with sample data.
+          files: MAHSA-Pulse.apk
           make_latest: false
