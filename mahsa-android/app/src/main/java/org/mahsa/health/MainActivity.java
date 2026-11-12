@@ -14,7 +14,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(Color.parseColor("#0B0D0E"));
+        getWindow().setStatusBarColor(Color.parseColor("#F4F7FB"));
+        getWindow().getDecorView().setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         web = new WebView(this);
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
         s.setAllowFileAccess(true);
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
+        s.setMediaPlaybackRequiresUserGesture(false);
         web.setWebViewClient(new WebViewClient());
         web.setWebChromeClient(new WebChromeClient());
         setContentView(web);
