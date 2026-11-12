@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(Color.parseColor("#F4F7FB"));
+        getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
         getWindow().getDecorView().setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         web = new WebView(this);
         WebSettings s = web.getSettings();
